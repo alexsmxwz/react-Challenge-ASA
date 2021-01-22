@@ -2,14 +2,19 @@ import React from "react";
 import { mockPokemonData } from "../mock/pokeData.js";
 
 function PokeCard(props) {
-  var { name, video } = mockPokemonData;
+  // get the info from the pokemon object
+  var { name, video, sprites } = mockPokemonData;
 
+  //iterate over the keys of the sprites
+  const listItems = Object.keys(sprites).map(function (keyname, keyindex) {
+    return <PokeImage url={sprites[keyname]} />;
+  });
+
+  //build the card using the list of items
   return (
     <div>
       <h1>{name}</h1>
-
-      <PokeImage name={name} url={mockPokemonData.sprites.front_default} />
-      <PokeImage name={name} url={mockPokemonData.sprites.front_shiny} />
+      <div>{listItems}</div>
       <a href={video} rel="noreferrer" target="_blank">
         Video
       </a>
